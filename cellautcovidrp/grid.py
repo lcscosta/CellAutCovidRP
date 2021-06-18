@@ -7,14 +7,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def grid_creation(Area, Popratio=1, Arearatio = 100):
+def create_grid(Area, Area_ratio = 100):
     ''' A function for creation of a grid'''
     
     # Area ratio
     # 1 km^2 -> 100 (100m^2)
 
     # number of grid divisions
-    gridcounts = Area * 100
+    gridcounts = Area * Area_ratio
 
     # grid side 
     gridside = int(np.sqrt(gridcounts))
@@ -24,20 +24,26 @@ def grid_creation(Area, Popratio=1, Arearatio = 100):
 
     return grid
 
-def pop_random(Grid, Population, Popratio=1):
-    ''' A function for creation of a grid'''
+def positionupdate(cells, grid):
 
-    # Pop = Population*Popratio
-
-    Population = Population*Popratio
+    for i in range(cells.shape[0]):
+        x, y = int(cells[i][0]), int(cells[i][1])
+        grid[x][y] += 1
     
-    for i in range(Population):
-        x = np.random.randint(len(Grid[0]))
-        y = np.random.randint(len(Grid[0]))
-        
-        Grid[x][y] += 1
+    return grid
 
-    return Grid
+def disease_positionupdate(cells, grid, Population):
+
+    for i in range(len(cells[0])):
+        x, y = cells[i][0], cells[i][1]
+        if grid[x][y] == 0 and cells[i][2] == 1:
+            grid[x][y] = 1
+        elif grid[x][y] == 0 and cells[i][2] == 2:
+            grid[x][y] = 2
+        else:
+            pass
+
+    return grid
 
 def grid_visualization(Grid):
     plt.matshow(Grid)
