@@ -9,14 +9,14 @@ import matplotlib.pyplot as plt
 
 def create_grid(Area, Area_ratio = 100):
     ''' A function for creation of a grid'''
-    
+
     # Area ratio
     # 1 km^2 -> 100 (100m^2)
 
     # number of grid divisions
     gridcounts = Area * Area_ratio
 
-    # grid side 
+    # grid side
     gridside = int(np.sqrt(gridcounts))
 
     # create Matrix
@@ -29,7 +29,7 @@ def positionupdate(cells, grid):
     for i in range(cells.shape[0]):
         x, y = int(cells[i][0]), int(cells[i][1])
         grid[x][y] += 1
-    
+
     return grid
 
 def disease_positionupdate(cells, grid, Population):
