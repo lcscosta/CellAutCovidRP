@@ -35,7 +35,7 @@ def save_city(cityname, grid, cellsmatrix):
 def read_city(cityname, Population, Pop_ratio=1):
 
     cells = np.zeros((Population,3))
-    i =0
+    i = 0
     with open(cityname + '.txt', 'r') as f:
         for line in f:
             parts = line.split(' ')
